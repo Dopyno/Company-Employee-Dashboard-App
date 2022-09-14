@@ -115,8 +115,6 @@ public class LoginController {
          System.out.println("File not found...!");
       }
    }
-
-
    @FXML
    public void loginToProgram(ActionEvent event) throws IOException, ClassNotFoundException{
       Main main = new Main();
@@ -125,7 +123,7 @@ public class LoginController {
 //         ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
 //         peopleList = (ArrayList<PersonModel>)ois.readObject();   // pharse our Arraylist Contact
 //         ois.close();
-           this.loadContactList();
+           this.loadContactList(); // load the list from out text file.
          System.out.println("---------------------------------------------------------");
          listIterator = peopleList.listIterator();   //just to test the list
          while (listIterator.hasNext()) {
@@ -135,14 +133,14 @@ public class LoginController {
          for (int i = 0; i < peopleList.size(); i++){
             if(userField.getText().toString().equals(peopleList.get(i).getUserName()) && passField.getText().toString().equals(peopleList.get(i).getPassword())){
                messageLabel.setText("Login successfully!");
-               main.changeScene("MainAppPage.fxml");
+             //  main.changeScene("MainAppPage.fxml");
+               main.switchPage(event, "MainAppPage.fxml");
             }else if(userField.getText().isEmpty() && passField.getText().isEmpty()){
                 messageLabel.setText("Please use a valid account!");
             }else {
                messageLabel.setText("Wrong Username and Password!Please try again!");
             }
          }
-
       } else {
          System.out.println("File not found...!");
       }
