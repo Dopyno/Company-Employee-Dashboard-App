@@ -36,17 +36,17 @@
                <Font name="System Bold Italic" size="18.0" />
             </font>
          </PasswordField>
-         <Button fx:id="loginButton" layoutX="133.0" layoutY="478.0" mnemonicParsing="false" onAction="#loginToProgram" prefHeight="40.0" prefWidth="120.0" text="Login">
+         <Button fx:id="loginButton" layoutX="133.0" layoutY="478.0" mnemonicParsing="false" onAction="#loginToProgram" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #58D68D;" text="Login">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button fx:id="cancelButton" layoutX="280.0" layoutY="478.0" mnemonicParsing="false" onAction="#setCancelButton" prefHeight="40.0" prefWidth="120.0" text="Cancel">
+         <Button fx:id="cancelButton" layoutX="280.0" layoutY="478.0" mnemonicParsing="false" onAction="#setCancelButton" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #EC7063;" text="Cancel">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
          </Button>
-         <Button fx:id="signupButton" layoutX="421.0" layoutY="478.0" mnemonicParsing="false" onAction="#switchToRegisterPage" prefHeight="40.0" prefWidth="120.0" text="Sign Up ">
+         <Button fx:id="signupButton" layoutX="421.0" layoutY="478.0" mnemonicParsing="false" onAction="#switchToRegisterPage" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #F4D03F;" text="Sign Up ">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>

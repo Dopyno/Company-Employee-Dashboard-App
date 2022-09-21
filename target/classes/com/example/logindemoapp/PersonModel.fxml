@@ -85,22 +85,22 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </TextField>
-            <Button fx:id="registerButton" layoutX="551.0" layoutY="637.0" mnemonicParsing="false" onAction="#createNewPersonModel" prefHeight="40.0" prefWidth="100.0" text="Register">
+            <Button fx:id="registerButton" layoutX="551.0" layoutY="637.0" mnemonicParsing="false" onAction="#createNewPersonModel" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #58D68D;" text="Register">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="clearButton" layoutX="690.0" layoutY="637.0" mnemonicParsing="false" onAction="#setClearButton" prefHeight="40.0" prefWidth="100.0" text="Clear">
+            <Button fx:id="clearButton" layoutX="690.0" layoutY="637.0" mnemonicParsing="false" onAction="#setClearButton" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #EC7063;" text="Clear">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="backButton" layoutX="829.0" layoutY="637.0" mnemonicParsing="false" onAction="#switchToLoginPage" prefHeight="40.0" prefWidth="100.0" text="Back">
+            <Button fx:id="backButton" layoutX="829.0" layoutY="637.0" mnemonicParsing="false" onAction="#switchToLoginPage" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #F5B041;" text="Back">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
-            <Label fx:id="copyrightField" alignment="CENTER" layoutX="329.0" layoutY="746.0" prefHeight="17.0" prefWidth="322.0" text="Copyright" textFill="#7c7a7a">
+            <Label fx:id="copyrightField" alignment="CENTER" layoutX="329.0" layoutY="746.0" prefHeight="17.0" prefWidth="322.0" text="Copyright@MariusIordan.2022" textFill="#7c7a7a">
                <font>
                   <Font name="System Italic" size="14.0" />
                </font>

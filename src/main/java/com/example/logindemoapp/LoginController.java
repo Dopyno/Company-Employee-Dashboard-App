@@ -13,9 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class LoginController {
@@ -27,6 +24,7 @@ public class LoginController {
    public PasswordField passField;
    @FXML
    public Label messageLabel, validationLabel;
+
    private Stage stage;
    private Scene scene;
    private Parent root;
@@ -77,7 +75,7 @@ public class LoginController {
    public void createNewPersonModel(ActionEvent event) throws IOException{
       if (file.isFile()) {
          try {
-            this.loadContactList();
+            this.loadContactListFromTxt();
             System.out.println(peopleList.toString());
             while (!userRegisterField.getText().isEmpty()) {
                if (!passField2.getText().equals(passField3.getText())) {
@@ -88,7 +86,9 @@ public class LoginController {
                   nameField.setText("");
                   emailField.setText("");
                   phoneField.setText("");
-               } else {
+               }else if(userRegisterField.getText().isEmpty() && passField2.getText().isEmpty()){
+                  validationLabel.setText("Please create your own account");
+               }else {
                   peopleList.add(new PersonModel(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText()));
                   System.out.println("Customer added successfully!");
                   validationLabel.setText("Details added successfully!");
@@ -111,7 +111,40 @@ public class LoginController {
 
          } catch (NotSerializableException e) {
          }
-      } else {
+      }else if(!file.isFile()){
+         System.out.println(peopleList.toString());
+         while (!userRegisterField.getText().isEmpty()) {
+            if (!passField2.getText().equals(passField3.getText())) {
+               validationLabel.setText("Password not match!Please try again!");
+               userRegisterField.setText("");
+               passField2.setText("");
+               passField3.setText("");
+               nameField.setText("");
+               emailField.setText("");
+               phoneField.setText("");
+            }else if(userRegisterField.getText().isEmpty() && passField2.getText().isEmpty()){
+               validationLabel.setText("Please create your own account");
+            } else {
+               peopleList.add(new PersonModel(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText()));
+               System.out.println("Customer added successfully!");
+               validationLabel.setText("Details added successfully!");
+               int i = 1;
+               for (PersonModel person : peopleList) {     //test purpose
+                  System.out.println(i + ". " + person);
+                  i++;
+               }
+               userRegisterField.setText("");
+               passField2.setText("");
+               passField3.setText("");
+               nameField.setText("");
+               emailField.setText("");
+               phoneField.setText("");
+            }
+         }
+         oos = new ObjectOutputStream(new FileOutputStream(file));   // After Contact list was created by user is time to store data in that File.txt
+         oos.writeObject(peopleList);                                  // ObjectOutputStream is created
+         oos.close();
+      }else {
          System.out.println("File not found...!");
       }
    }
@@ -123,7 +156,7 @@ public class LoginController {
 //         ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
 //         peopleList = (ArrayList<PersonModel>)ois.readObject();   // pharse our Arraylist Contact
 //         ois.close();
-           this.loadContactList(); // load the list from out text file.
+           this.loadContactListFromTxt(); // load the list from out text file.
          System.out.println("---------------------------------------------------------");
          listIterator = peopleList.listIterator();   //just to test the list
          while (listIterator.hasNext()) {
@@ -133,22 +166,42 @@ public class LoginController {
          for (int i = 0; i < peopleList.size(); i++){
             if(userField.getText().toString().equals(peopleList.get(i).getUserName()) && passField.getText().toString().equals(peopleList.get(i).getPassword())){
                messageLabel.setText("Login successfully!");
-             //  main.changeScene("MainAppPage.fxml");
-               main.switchPage(event, "MainAppPage.fxml");
+             //  main.changeScene("MainPage.fxml");
+               main.switchPage(event, "MainPage.fxml");
             }else if(userField.getText().isEmpty() && passField.getText().isEmpty()){
                 messageLabel.setText("Please use a valid account!");
             }else {
                messageLabel.setText("Wrong Username and Password!Please try again!");
             }
          }
-      } else {
+      }else if(!file.isFile()){
+         messageLabel.setText("Please use a valid account!");
+         System.out.println("---------------------------------------------------------");
+         listIterator = peopleList.listIterator();   //just to test the list
+         while (listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+         }
+         System.out.println("---------------------------------------------------------");
+         for (int i = 0; i < peopleList.size(); i++){
+            if(userField.getText().toString().equals(peopleList.get(i).getUserName()) && passField.getText().toString().equals(peopleList.get(i).getPassword())){
+               messageLabel.setText("Login successfully!");
+               //  main.changeScene("MainPage.fxml");
+               main.switchPage(event, "MainPage.fxml");
+            }else if(userField.getText().isEmpty() && passField.getText().isEmpty()){
+               messageLabel.setText("Please use a valid account!");
+            }else {
+               messageLabel.setText("Wrong Username and Password!Please try again!");
+            }
+         }
+      }else {
+         messageLabel.setText("Please use a valid account!");
          System.out.println("File not found...!");
       }
    }
-   private void loadContactList(){
+   public void loadContactListFromTxt(){
       try {
          ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
-         peopleList = (ArrayList<PersonModel>)ois.readObject();   // pharse our Arraylist Contact
+         peopleList = (ArrayList<PersonModel>)ois.readObject();   // parse our Arraylist Contact
          ois.close();
       } catch (IOException e) {
          System.out.println(e);
@@ -156,6 +209,10 @@ public class LoginController {
         System.out.println(e);
       }
    }
-
+   public void saveContactListToTxt()throws IOException{
+      oos = new ObjectOutputStream(new FileOutputStream(file));   // After Contact list was created by user is time to store data in that File.txt
+      oos.writeObject(peopleList);                                  // ObjectOutputStream is created
+      oos.close();
+   }
 }
 

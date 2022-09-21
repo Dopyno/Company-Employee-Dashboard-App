@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logindemoapp.Admin">
+   <children>
+      <ImageView fitHeight="806.0" fitWidth="1000.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="file:/D:/Java%20project/LoginDemoApp/src/main/java/image/hacker-5481612_1920.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="426.0" layoutY="62.0" prefHeight="53.0" prefWidth="167.0" style="-fx-background-color: #7DCEA0;" text="Admin">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="93.0" fitWidth="132.0" layoutX="858.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../java/image/Kali.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="357.0" layoutY="761.0" prefHeight="17.0" prefWidth="304.0" text="Copyright@MariusIordan.2022" />
+   </children>
+</AnchorPane>
