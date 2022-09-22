@@ -3,19 +3,19 @@ import PersonModel.PersonModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 
-public class LoginController {
+public class LoginController{
    @FXML
    public Button loginButton, backButton, cancelButton, signupButton, registerButton, clearButton;
    @FXML
@@ -29,6 +29,7 @@ public class LoginController {
    private Scene scene;
    private Parent root;
    public ArrayList<PersonModel> peopleList = new ArrayList<>();
+
    public File file = new File("PersonModelList.txt");
    private ObjectOutputStream oos = null;
    private ObjectInputStream ois = null;
@@ -126,7 +127,7 @@ public class LoginController {
                validationLabel.setText("Please create your own account");
             } else {
                peopleList.add(new PersonModel(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText()));
-               System.out.println("Customer added successfully!");
+               System.out.println("Added successfully!");
                validationLabel.setText("Details added successfully!");
                int i = 1;
                for (PersonModel person : peopleList) {     //test purpose
@@ -148,51 +149,24 @@ public class LoginController {
          System.out.println("File not found...!");
       }
    }
+
+   DataSingleton data = DataSingleton.getInstance();
    @FXML
    public void loginToProgram(ActionEvent event) throws IOException, ClassNotFoundException{
       Main main = new Main();
+
       System.out.println("button selected");
-      if (file.isFile()) {
+      if (file.isFile()) {  // check if file.txt exist
 //         ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
-//         peopleList = (ArrayList<PersonModel>)ois.readObject();   // pharse our Arraylist Contact
+//         peopleList = (ArrayList<PersonModel>)ois.readObject();   // parse our Arraylist Contact
 //         ois.close();
-           this.loadContactListFromTxt(); // load the list from out text file.
-         System.out.println("---------------------------------------------------------");
-         listIterator = peopleList.listIterator();   //just to test the list
-         while (listIterator.hasNext()) {
-            System.out.println(listIterator.next());
-         }
-         System.out.println("---------------------------------------------------------");
-         for (int i = 0; i < peopleList.size(); i++){
-            if(userField.getText().toString().equals(peopleList.get(i).getUserName()) && passField.getText().toString().equals(peopleList.get(i).getPassword())){
-               messageLabel.setText("Login successfully!");
-             //  main.changeScene("MainPage.fxml");
-               main.switchPage(event, "MainPage.fxml");
-            }else if(userField.getText().isEmpty() && passField.getText().isEmpty()){
-                messageLabel.setText("Please use a valid account!");
-            }else {
-               messageLabel.setText("Wrong Username and Password!Please try again!");
-            }
-         }
-      }else if(!file.isFile()){
+         this.loadContactListFromTxt(); // load the list from out text file.
+         this.displayListInConsole();  // test purpose
+         checkUserAndPassword(main, event ,peopleList, userField, passField);
+      }else if(!file.isFile()){   // check if file.txt  NOT exist
          messageLabel.setText("Please use a valid account!");
-         System.out.println("---------------------------------------------------------");
-         listIterator = peopleList.listIterator();   //just to test the list
-         while (listIterator.hasNext()) {
-            System.out.println(listIterator.next());
-         }
-         System.out.println("---------------------------------------------------------");
-         for (int i = 0; i < peopleList.size(); i++){
-            if(userField.getText().toString().equals(peopleList.get(i).getUserName()) && passField.getText().toString().equals(peopleList.get(i).getPassword())){
-               messageLabel.setText("Login successfully!");
-               //  main.changeScene("MainPage.fxml");
-               main.switchPage(event, "MainPage.fxml");
-            }else if(userField.getText().isEmpty() && passField.getText().isEmpty()){
-               messageLabel.setText("Please use a valid account!");
-            }else {
-               messageLabel.setText("Wrong Username and Password!Please try again!");
-            }
-         }
+         this.displayListInConsole();  // test purpose
+         this.checkUserAndPassword(main, event ,peopleList, userField, passField);
       }else {
          messageLabel.setText("Please use a valid account!");
          System.out.println("File not found...!");
@@ -214,5 +188,33 @@ public class LoginController {
       oos.writeObject(peopleList);                                  // ObjectOutputStream is created
       oos.close();
    }
+   public void displayListInConsole(){
+      System.out.println("---------------------------------------------------------");
+      listIterator = peopleList.listIterator();   //just to test the list
+      while (listIterator.hasNext()) {
+         System.out.println(listIterator.next());
+      }
+      System.out.println("---------------------------------------------------------");
+   }
+   @FXML
+   public void checkUserAndPassword(Main main, ActionEvent event, ArrayList<PersonModel> list, TextField user, PasswordField password)throws IOException{
+      PersonModel parseUser = list.get(list.indexOf(user.getText().toString()));
+      System.out.println(parseUser.toString());
+      for (int i = 0; i < list.size(); i++){
+
+         if(user.getText().toString().equals(list.get(i).getUserName()) && password.getText().toString().equals(list.get(i).getPassword())){
+            messageLabel.setText("Login successfully!");
+          //  data.setUser(user);
+            //  main.changeScene("MainPage.fxml");
+            main.switchPage(event, "MainPage.fxml");
+         }else if(user.getText().isEmpty() && password.getText().isEmpty()){
+            messageLabel.setText("Please use a valid account!");
+         }else {
+            messageLabel.setText("Wrong Username and Password!Please try again!");
+         }
+      }
+   }
+
+
 }
 

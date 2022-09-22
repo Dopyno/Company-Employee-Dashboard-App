@@ -59,7 +59,7 @@ public class PersonModel implements Serializable {
 
     @Override
     public String toString() {
-        return "Your Username is: \"" + userName + "\" and your full detail: \n\tName: " +
+        return "Full detail:\n\tUsername: \"" + userName + "\" \n\tName: " +
                 fullName + " \n\tEmail: " +  emailAddress +" \n\tPhone:" +  phoneNumber;
     }
 }

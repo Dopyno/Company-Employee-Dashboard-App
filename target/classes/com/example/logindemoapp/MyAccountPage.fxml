@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Line endX="275.0" layoutX="387.0" layoutY="59.0" startX="-246.0" stroke="#007fb5" />
-      <Button fx:id="accInfoButton" layoutX="90.0" layoutY="106.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #F7DC6F;" text="Account Info">
+      <Button fx:id="accInfoButton" layoutX="90.0" layoutY="106.0" mnemonicParsing="false" onAction="#viewInfo" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #F7DC6F;" text="Account Info">
          <font>
             <Font name="Consolas Bold" size="14.0" />
          </font>
@@ -31,32 +31,32 @@
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="userField" layoutX="301.0" layoutY="251.0" prefHeight="36.0" prefWidth="375.0" promptText="Username">
+      <TextField fx:id="userFieldInfo" layoutX="301.0" layoutY="251.0" prefHeight="36.0" prefWidth="375.0" promptText="Username">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="passField2" layoutX="301.0" layoutY="298.0" prefHeight="36.0" prefWidth="375.0" promptText="Password">
+      <TextField fx:id="passField2Info" layoutX="301.0" layoutY="298.0" prefHeight="36.0" prefWidth="375.0" promptText="Password">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="passField3" layoutX="301.0" layoutY="343.0" prefHeight="36.0" prefWidth="375.0" promptText="Password">
+      <TextField fx:id="passField3Info" layoutX="301.0" layoutY="343.0" prefHeight="36.0" prefWidth="375.0" promptText="Password">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="nameField" layoutX="301.0" layoutY="393.0" prefHeight="36.0" prefWidth="375.0" promptText="Full Name">
+      <TextField fx:id="nameFieldInfo" layoutX="301.0" layoutY="393.0" prefHeight="36.0" prefWidth="375.0" promptText="Full Name">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="phoneField" layoutX="301.0" layoutY="438.0" prefHeight="36.0" prefWidth="375.0" promptText="Phone">
+      <TextField fx:id="phoneFieldInfo" layoutX="301.0" layoutY="488.0" prefHeight="36.0" prefWidth="375.0" promptText="Phone">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="emailField" layoutX="301.0" layoutY="487.0" prefHeight="36.0" prefWidth="375.0" promptText="Email">
+      <TextField fx:id="emailFieldInfo" layoutX="301.0" layoutY="443.0" prefHeight="36.0" prefWidth="375.0" promptText="Email">
          <font>
             <Font size="14.0" />
          </font>
@@ -81,31 +81,31 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="147.0" layoutY="438.0" prefHeight="37.0" prefWidth="154.0" text="Phone">
+      <Label alignment="CENTER" layoutX="151.0" layoutY="488.0" prefHeight="37.0" prefWidth="154.0" text="Phone">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="147.0" layoutY="487.0" prefHeight="37.0" prefWidth="154.0" text="Email">
+      <Label alignment="CENTER" layoutX="151.0" layoutY="442.0" prefHeight="37.0" prefWidth="154.0" text="Email">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="submitButton" layoutX="369.0" layoutY="541.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: #2ECC71;" text="Submit">
+      <Button fx:id="submitInfoButton" layoutX="369.0" layoutY="541.0" mnemonicParsing="false" onAction="#submitAccountChanges" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: #2ECC71;" text="Submit">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="clearButton" layoutX="489.0" layoutY="541.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: #8181F7;" text="Clear">
+      <Button fx:id="clearInfoButton" layoutX="489.0" layoutY="541.0" mnemonicParsing="false" onAction="#clearInfoFields" prefHeight="36.0" prefWidth="92.0" style="-fx-background-color: #8181F7;" text="Clear">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="617.0" layoutY="541.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: #EC7063;" text="Delete Account">
+      <Button fx:id="deleteInfoButton" layoutX="617.0" layoutY="541.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: #EC7063;" text="Delete Account">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="message" alignment="CENTER" layoutX="25.0" layoutY="551.0" prefHeight="17.0" prefWidth="318.0" textFill="#f20000" />
+      <Label fx:id="messageInfo" alignment="CENTER" layoutX="25.0" layoutY="551.0" prefHeight="17.0" prefWidth="318.0" textFill="#f20000" />
    </children>
 </AnchorPane>
