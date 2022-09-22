@@ -154,7 +154,7 @@ public class LoginController{
    @FXML
    public void loginToProgram(ActionEvent event) throws IOException, ClassNotFoundException{
       Main main = new Main();
-
+      data.setUserName(userField.getText());
       System.out.println("button selected");
       if (file.isFile()) {  // check if file.txt exist
 //         ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
@@ -198,13 +198,9 @@ public class LoginController{
    }
    @FXML
    public void checkUserAndPassword(Main main, ActionEvent event, ArrayList<PersonModel> list, TextField user, PasswordField password)throws IOException{
-      PersonModel parseUser = list.get(list.indexOf(user.getText().toString()));
-      System.out.println(parseUser.toString());
       for (int i = 0; i < list.size(); i++){
-
          if(user.getText().toString().equals(list.get(i).getUserName()) && password.getText().toString().equals(list.get(i).getPassword())){
             messageLabel.setText("Login successfully!");
-          //  data.setUser(user);
             //  main.changeScene("MainPage.fxml");
             main.switchPage(event, "MainPage.fxml");
          }else if(user.getText().isEmpty() && password.getText().isEmpty()){
