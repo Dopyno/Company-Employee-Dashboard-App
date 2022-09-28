@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 public class MyAccountPage implements Initializable {
     DataSingleton data = DataSingleton.getInstance();
     LoginController login = new LoginController();
-
     @FXML
     private Label messageInfo;
     @FXML
@@ -25,7 +24,6 @@ public class MyAccountPage implements Initializable {
     private Button accInfoButton, submitInfoButton, clearInfoButton, deleteInfoButton;
     @FXML
     private TextField userFieldInfo, passField2Info, passField3Info, nameFieldInfo, phoneFieldInfo, emailFieldInfo;
-
     @FXML
     public void clearInfoFields(){
         userFieldInfo.setText("");
@@ -35,7 +33,6 @@ public class MyAccountPage implements Initializable {
         phoneFieldInfo.setText("");
         emailFieldInfo.setText("");
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }

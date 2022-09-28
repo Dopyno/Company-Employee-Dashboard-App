@@ -29,7 +29,8 @@ public class CalculatorPage {
     public void addToCalculator(ActionEvent event) {
         if (nameField.getText().isEmpty()) {
             messageLabel.setText("Please enter a valid record!");
-        } else {
+        }else {
+            try {
                 int hours = Integer.parseInt(hoursField.getText());
                 list.add(new TimeSheets(nameField.getText(), jobField.getText(), hours));
                 messageLabel.setText("Your entry was added successfully!");
@@ -37,6 +38,11 @@ public class CalculatorPage {
                 textLive.setWrapText(true);
                 clearFields();
                 //calculate();
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+                messageLabel.setText("Please enter a number in Worked Hour section!");
+                clearFields();
+            }
         }
     }
 
@@ -53,20 +59,17 @@ public class CalculatorPage {
         for (int i = 0; i < login.peopleList.size(); i++) {
             if(login.peopleList.get(i).getUserName().equals(data.getUserName())){
                 invoice.appendText(login.peopleList.get(i).getFullName().toString() + "\n");
-
             }
         }
         invoice.appendText("Your total income for this week is: £" + total + "\n");
         invoice.appendText("An copy of your invoice will be sent on your email address, after we will check if the hours correspond to our records.");
         invoice.setWrapText(true);
-
     }
     @FXML
     private void clearFields(){
         nameField.setText("");
         jobField.setText("");
         hoursField.setText("");
-
     }
     public int incomeCalculator(int hourRate, int totalHours){
         int total;

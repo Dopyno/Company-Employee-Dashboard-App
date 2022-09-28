@@ -157,9 +157,6 @@ public class LoginController{
       data.setUserName(userField.getText());
       System.out.println("button selected");
       if (file.isFile()) {  // check if file.txt exist
-//         ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
-//         peopleList = (ArrayList<PersonModel>)ois.readObject();   // parse our Arraylist Contact
-//         ois.close();
          this.loadContactListFromTxt(); // load the list from out text file.
          this.displayListInConsole();  // test purpose
          checkUserAndPassword(main, event ,peopleList, userField, passField);
@@ -211,7 +208,5 @@ public class LoginController{
          }
       }
    }
-
-
 }
 

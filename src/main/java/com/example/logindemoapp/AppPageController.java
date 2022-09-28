@@ -27,7 +27,6 @@ public class AppPageController implements Initializable {
        // main.changeScene("Login.fxml");
         main.switchPage(event, "Login.fxml");
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
