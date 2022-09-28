@@ -14,8 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MyAccountPage implements Initializable {
-    DataSingleton data = DataSingleton.getInstance();
-    LoginController login = new LoginController();
+    private DataSingleton data = null;
+
     @FXML
     private Label messageInfo;
     @FXML
@@ -33,14 +33,17 @@ public class MyAccountPage implements Initializable {
         phoneFieldInfo.setText("");
         emailFieldInfo.setText("");
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initData(DataSingleton parentData){
+        data = parentData;
     }
+
+
     @FXML
     public void viewInfo(){
-        login.loadContactListFromTxt();
-            System.out.println(data.getUserName());
-            for (PersonModel model : login.peopleList){
+
+//            System.out.println(data.getUserName());
+            for (PersonModel model : data.peopleList){
                 if (data.getUserName().equals(model.getUserName())){
                     textInfo.setText(model.toString());
                     textInfo.setWrapText(true);
@@ -55,11 +58,12 @@ public class MyAccountPage implements Initializable {
     @FXML
     public void submitAccountChanges(ActionEvent event)throws IOException {
         int index = 0;
-        login.loadContactListFromTxt();   //load from txt
+        System.out.println(data.peopleList);
+
         if (event.getSource() == submitInfoButton){
             System.out.println(data.getUserName());
-            for (int i = 0; i < login.peopleList.size(); i++){
-                if(data.getUserName().equals(login.peopleList.get(i).getUserName())){
+            for (int i = 0; i < data.peopleList.size(); i++){
+                if(data.getUserName().equals(data.peopleList.get(i).getUserName())){
                     index = i;
                 }
             }
@@ -69,21 +73,20 @@ public class MyAccountPage implements Initializable {
                 messageInfo.setText("Password not match");
                 clearInfoFields();
             }else{
-                login.peopleList.set(index, new PersonModel(userFieldInfo.getText(), passField2Info.getText(), nameFieldInfo.getText(), emailFieldInfo.getText(), phoneFieldInfo.getText()));
+                data.peopleList.set(index, new PersonModel(userFieldInfo.getText(), passField2Info.getText(), nameFieldInfo.getText(), emailFieldInfo.getText(), phoneFieldInfo.getText()));
                 messageInfo.setText("Changed successfully!");
                 clearInfoFields();
             }
 
         }
-        login.saveContactListToTxt();  //load to txt
+        data.savePersonsToFile();  //load to txt
     }
     @FXML
     public void deleteAccount(ActionEvent event)throws IOException{
-        login.loadContactListFromTxt();   //load from txt
         if(event.getSource() == deleteInfoButton){
-            for (int i = 0; i < login.peopleList.size(); i++){
-                if(data.getUserName().equals(login.peopleList.get(i).getUserName())){
-                    login.peopleList.remove(i);
+            for (int i = 0; i < data.peopleList.size(); i++){
+                if(data.getUserName().equals(data.peopleList.get(i).getUserName())){
+                    data.peopleList.remove(i);
                     System.out.println("Deleted account!");
                     messageInfo.setText("Your account has been deleted!");
                     Main main = new Main();
@@ -92,6 +95,11 @@ public class MyAccountPage implements Initializable {
             }
 
         }
-        login.saveContactListToTxt();
+        data.savePersonsToFile();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

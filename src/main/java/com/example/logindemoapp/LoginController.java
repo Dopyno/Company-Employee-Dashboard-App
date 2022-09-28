@@ -28,21 +28,23 @@ public class LoginController{
    private Stage stage;
    private Scene scene;
    private Parent root;
-   public ArrayList<PersonModel> peopleList = new ArrayList<>();
+   private DataSingleton data = null;
 
-   public File file = new File("PersonModelList.txt");
-   private ObjectOutputStream oos = null;
-   private ObjectInputStream ois = null;
-   private ListIterator listIterator = null;
+   @FXML
+   public void initialize(){
+      data = new DataSingleton();
+   }
+
+   @FXML
+   private void receiveData(DataSingleton parentData) {
+      data = parentData;
+   }
+
+
    @FXML
    public void setClearButton(ActionEvent event) {
       if (event.getSource() == clearButton) {
-         userRegisterField.setText("");
-         passField2.setText("");
-         passField3.setText("");
-         nameField.setText("");
-         emailField.setText("");
-         phoneField.setText("");
+         this.clearForm();
       }
    }
 
@@ -74,125 +76,71 @@ public class LoginController{
 
    @FXML
    public void createNewPersonModel(ActionEvent event) throws IOException{
-      if (file.isFile()) {
+      if (data.file.isFile()) {
          try {
-            this.loadContactListFromTxt();
-            System.out.println(peopleList.toString());
             while (!userRegisterField.getText().isEmpty()) {
                if (!passField2.getText().equals(passField3.getText())) {
                   validationLabel.setText("Password not match!Please try again!");
-                  userRegisterField.setText("");
-                  passField2.setText("");
-                  passField3.setText("");
-                  nameField.setText("");
-                  emailField.setText("");
-                  phoneField.setText("");
+                  this.clearForm();
                }else if(userRegisterField.getText().isEmpty() && passField2.getText().isEmpty()){
                   validationLabel.setText("Please create your own account");
                }else {
-                  peopleList.add(new PersonModel(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText()));
+                  data.peopleList.add(new PersonModel(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText()));
                   System.out.println("Customer added successfully!");
                   validationLabel.setText("Details added successfully!");
-                  int i = 1;
-                  for (PersonModel person : peopleList) {     //test purpose
-                     System.out.println(i + ". " + person);
-                     i++;
-                  }
-                  userRegisterField.setText("");
-                  passField2.setText("");
-                  passField3.setText("");
-                  nameField.setText("");
-                  emailField.setText("");
-                  phoneField.setText("");
+              this.clearForm();
                }
             }
-            oos = new ObjectOutputStream(new FileOutputStream(file));   // After Contact list was created by user is time to store data in that File.txt
-            oos.writeObject(peopleList);                                  // ObjectOutputStream is created
-            oos.close();
+            data.savePersonsToFile();
 
          } catch (NotSerializableException e) {
          }
-      }else if(!file.isFile()){
-         System.out.println(peopleList.toString());
+      }else if(!data.file.isFile()){
+         System.out.println(data.peopleList.toString());
          while (!userRegisterField.getText().isEmpty()) {
             if (!passField2.getText().equals(passField3.getText())) {
                validationLabel.setText("Password not match!Please try again!");
-               userRegisterField.setText("");
-               passField2.setText("");
-               passField3.setText("");
-               nameField.setText("");
-               emailField.setText("");
-               phoneField.setText("");
+               this.clearForm();
             }else if(userRegisterField.getText().isEmpty() && passField2.getText().isEmpty()){
                validationLabel.setText("Please create your own account");
             } else {
-               peopleList.add(new PersonModel(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText()));
-               System.out.println("Added successfully!");
+               data.addPerson(userRegisterField.getText(), passField2.getText(), nameField.getText(), emailField.getText(), phoneField.getText());
                validationLabel.setText("Details added successfully!");
-               int i = 1;
-               for (PersonModel person : peopleList) {     //test purpose
-                  System.out.println(i + ". " + person);
-                  i++;
-               }
-               userRegisterField.setText("");
-               passField2.setText("");
-               passField3.setText("");
-               nameField.setText("");
-               emailField.setText("");
-               phoneField.setText("");
+               this.clearForm();
             }
          }
-         oos = new ObjectOutputStream(new FileOutputStream(file));   // After Contact list was created by user is time to store data in that File.txt
-         oos.writeObject(peopleList);                                  // ObjectOutputStream is created
-         oos.close();
+         data.savePersonsToFile();
       }else {
          System.out.println("File not found...!");
       }
    }
 
-   DataSingleton data = DataSingleton.getInstance();
+   public void clearForm() {
+      userRegisterField.setText("");
+      passField2.setText("");
+      passField3.setText("");
+      nameField.setText("");
+      emailField.setText("");
+      phoneField.setText("");
+   }
    @FXML
    public void loginToProgram(ActionEvent event) throws IOException, ClassNotFoundException{
       Main main = new Main();
       data.setUserName(userField.getText());
       System.out.println("button selected");
-      if (file.isFile()) {  // check if file.txt exist
-         this.loadContactListFromTxt(); // load the list from out text file.
-         this.displayListInConsole();  // test purpose
-         checkUserAndPassword(main, event ,peopleList, userField, passField);
-      }else if(!file.isFile()){   // check if file.txt  NOT exist
+      if (data.file.isFile()) {  // check if file.txt exist
+         checkUserAndPassword(main, event ,data.peopleList, userField, passField);
+      }else if(!data.file.isFile()){   // check if file.txt  NOT exist
          messageLabel.setText("Please use a valid account!");
-         this.displayListInConsole();  // test purpose
-         this.checkUserAndPassword(main, event ,peopleList, userField, passField);
+         this.checkUserAndPassword(main, event ,data.peopleList, userField, passField);
       }else {
          messageLabel.setText("Please use a valid account!");
          System.out.println("File not found...!");
       }
    }
-   public void loadContactListFromTxt(){
-      try {
-         ois = new ObjectInputStream(new FileInputStream(file));  //Check if our file is existing(created) and load it. (ObjectInputStream)- to read data
-         peopleList = (ArrayList<PersonModel>)ois.readObject();   // parse our Arraylist Contact
-         ois.close();
-      } catch (IOException e) {
-         System.out.println(e);
-      } catch (ClassNotFoundException e) {
-        System.out.println(e);
-      }
-   }
-   public void saveContactListToTxt()throws IOException{
-      oos = new ObjectOutputStream(new FileOutputStream(file));   // After Contact list was created by user is time to store data in that File.txt
-      oos.writeObject(peopleList);                                  // ObjectOutputStream is created
-      oos.close();
-   }
-   public void displayListInConsole(){
-      System.out.println("---------------------------------------------------------");
-      listIterator = peopleList.listIterator();   //just to test the list
-      while (listIterator.hasNext()) {
-         System.out.println(listIterator.next());
-      }
-      System.out.println("---------------------------------------------------------");
-   }
+
+
+
    @FXML
    public void checkUserAndPassword(Main main, ActionEvent event, ArrayList<PersonModel> list, TextField user, PasswordField password)throws IOException{
 
@@ -200,7 +148,7 @@ public class LoginController{
          if(user.getText().toString().equals(list.get(i).getUserName()) && password.getText().toString().equals(list.get(i).getPassword())){
             messageLabel.setText("Login successfully!");
             //  main.changeScene("MainPage.fxml");
-            main.switchPage(event, "MainPage.fxml");
+            main.switchToMainPage(event, user.getText().toString());
          }else if(user.getText().isEmpty() && password.getText().isEmpty()){
             messageLabel.setText("Please use a valid account!");
          }else {

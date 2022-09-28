@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorPage {
-    DataSingleton data = DataSingleton.getInstance();
-    LoginController login = new LoginController();
+    private DataSingleton data = null;
     private List<TimeSheets> list = new ArrayList<>();
 
     @FXML
@@ -56,9 +55,9 @@ public class CalculatorPage {
                 total += incomeCalculator(warehouseRate, list.get(i).getWorkedHours());
             }
         }
-        for (int i = 0; i < login.peopleList.size(); i++) {
-            if(login.peopleList.get(i).getUserName().equals(data.getUserName())){
-                invoice.appendText(login.peopleList.get(i).getFullName().toString() + "\n");
+        for (int i = 0; i < data.peopleList.size(); i++) {
+            if(data.peopleList.get(i).getUserName().equals(data.getUserName())){
+                invoice.appendText(data.peopleList.get(i).getFullName().toString() + "\n");
             }
         }
         invoice.appendText("Your total income for this week is: £" + total + "\n");
@@ -75,5 +74,10 @@ public class CalculatorPage {
         int total;
         total = hourRate * totalHours;
         return total;
+    }
+
+    @FXML
+    public void initData(DataSingleton parentData){
+        data = parentData;
     }
 }

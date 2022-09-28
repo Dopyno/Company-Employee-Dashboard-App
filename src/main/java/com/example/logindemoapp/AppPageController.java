@@ -7,12 +7,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AppPageController implements Initializable {
+    private DataSingleton data = null;
+    private Main main = null;
+
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -23,12 +28,11 @@ public class AppPageController implements Initializable {
     private AnchorPane homePane;
     @FXML
     public void logOut(ActionEvent event) throws IOException {
-        Main main = new Main();
-       // main.changeScene("Login.fxml");
         main.switchPage(event, "Login.fxml");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        main = new Main();
     }
     @FXML
     public void switchHomePage(ActionEvent event){
@@ -38,9 +42,17 @@ public class AppPageController implements Initializable {
     }
     @FXML
     private void calculatorScreen(ActionEvent event) throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("CalculatorPage.fxml"));
+        String page = "CalculatorPage.fxml";
+        FXMLLoader loader = main.loadResource(page);
+        AnchorPane view = main.loadPane(loader, page);
+        System.out.println(loader);
+        CalculatorPage controller = loader.getController();
+        controller.initData(data);
+
+//        main.stage.show();
+
         borderPane.setCenter(view);
-    }
+   }
     @FXML
     private void myAccountScreen(ActionEvent event) throws IOException {
         AnchorPane view = FXMLLoader.load(getClass().getResource("MyAccountPage.fxml"));
@@ -55,6 +67,10 @@ public class AppPageController implements Initializable {
     private void homeScreen(ActionEvent event) throws IOException {
         AnchorPane view = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         borderPane.setCenter(view);
+    }
+
+    public void initData(DataSingleton parentData){
+        data = parentData;
     }
 
 }
