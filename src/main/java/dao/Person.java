@@ -1,17 +1,15 @@
-package PersonModel;
+package dao;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.ListIterator;
+import java.io.Serializable;
 
-public class PersonModel implements Serializable {
+public class Person implements Serializable {
     private String userName;
     private String password;
     private String fullName;
     private String emailAddress;
     private String phoneNumber;
 
-    public PersonModel(String userName, String password, String fullName, String emailAddress, String phoneNumber) {
+    public Person(String userName, String password, String fullName, String emailAddress, String phoneNumber) {
         this.userName = userName;
         this.password = password;
         this.fullName = fullName;

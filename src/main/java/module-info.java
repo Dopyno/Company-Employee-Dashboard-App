@@ -7,6 +7,10 @@ module com.example.logindemoapp {
 
     opens com.example.logindemoapp to javafx.fxml;
     exports com.example.logindemoapp;
-    exports PersonModel;
-    opens PersonModel to javafx.fxml;
+    exports dao;
+    opens dao to javafx.fxml;
+    exports views;
+    opens views to javafx.fxml;
+    exports controllers;
+    opens controllers to javafx.fxml;
 }

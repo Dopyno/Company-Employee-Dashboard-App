@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logindemoapp.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <right>
       <AnchorPane prefHeight="800.0" prefWidth="673.0" BorderPane.alignment="CENTER">
          <ImageView fx:id="image" fitHeight="800.0" fitWidth="669.0" layoutX="4.0">
-            <Image url="file:/D:/Java%20project/LoginDemoApp/src/main/java/image/ciber.jfif" />
+            <Image url="/images/ciber.jfif" />
          </ImageView>
          <Label alignment="CENTER" layoutX="121.0" layoutY="335.0" prefHeight="49.0" prefWidth="122.0" text="Username" textFill="WHITE">
             <font>
@@ -53,7 +53,7 @@
          </Button>
          <ImageView fitHeight="128.0" fitWidth="152.0" layoutX="259.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="file:/D:/Java%20project/LoginDemoApp/src/main/java/image/lockNew.png" />
+               <Image url="images/lockNew.png" />
             </image>
          </ImageView>
          <Label fx:id="messageLabel" alignment="CENTER" layoutX="125.0" layoutY="222.0" prefHeight="51.0" prefWidth="410.0" textFill="RED">
@@ -73,12 +73,12 @@
          <children>
             <ImageView fitHeight="800.0" fitWidth="339.0" layoutX="-6.0" pickOnBounds="true">
                <image>
-                  <Image url="file:/D:/Java%20project/LoginDemoApp/src/main/java/image/artificial.png" />
+                  <Image url="images/artificial.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/D:/Java%20project/LoginDemoApp/src/main/java/image/welcomeRobot.png" />
+                  <Image url="images/welcomeRobot.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="29.0" layoutY="724.0" prefHeight="33.0" prefWidth="277.0" text="Copyright@MariusIordan.2022" textFill="#a4a4a4">

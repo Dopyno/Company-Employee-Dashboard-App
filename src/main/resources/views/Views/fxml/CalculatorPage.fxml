@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F8F9F9;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logindemoapp.CalculatorPage">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F8F9F9;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CalculatorPage">
    <children>
       <Label alignment="CENTER" layoutX="81.0" layoutY="24.0" prefHeight="31.0" prefWidth="639.0" text="In this section you can register your time sheets">
          <font>

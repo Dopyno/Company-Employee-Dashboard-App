@@ -1,6 +1,7 @@
-package com.example.logindemoapp;
+package controllers;
 
-import PersonModel.PersonModel;
+import dao.Person;
+import dao.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,13 +9,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import views.Views;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MyAccountPage implements Initializable {
-    private DataSingleton data = null;
+    private Views views;
+
+    private Store data = null;
 
     @FXML
     private Label messageInfo;
@@ -24,6 +29,12 @@ public class MyAccountPage implements Initializable {
     private Button accInfoButton, submitInfoButton, clearInfoButton, deleteInfoButton;
     @FXML
     private TextField userFieldInfo, passField2Info, passField3Info, nameFieldInfo, phoneFieldInfo, emailFieldInfo;
+
+    public MyAccountPage() throws IOException, Exception {
+        views = Views.getInstance();
+        data = Store.getInstance();
+    }
+
     @FXML
     public void clearInfoFields(){
         userFieldInfo.setText("");
@@ -34,7 +45,7 @@ public class MyAccountPage implements Initializable {
         emailFieldInfo.setText("");
     }
 
-    public void initData(DataSingleton parentData){
+    public void initData(Store parentData){
         data = parentData;
     }
 
@@ -43,7 +54,7 @@ public class MyAccountPage implements Initializable {
     public void viewInfo(){
 
 //            System.out.println(data.getUserName());
-            for (PersonModel model : data.peopleList){
+            for (Person model : data.peopleList){
                 if (data.getUserName().equals(model.getUserName())){
                     textInfo.setText(model.toString());
                     textInfo.setWrapText(true);
@@ -73,7 +84,7 @@ public class MyAccountPage implements Initializable {
                 messageInfo.setText("Password not match");
                 clearInfoFields();
             }else{
-                data.peopleList.set(index, new PersonModel(userFieldInfo.getText(), passField2Info.getText(), nameFieldInfo.getText(), emailFieldInfo.getText(), phoneFieldInfo.getText()));
+                data.peopleList.set(index, new Person(userFieldInfo.getText(), passField2Info.getText(), nameFieldInfo.getText(), emailFieldInfo.getText(), phoneFieldInfo.getText()));
                 messageInfo.setText("Changed successfully!");
                 clearInfoFields();
             }
@@ -89,8 +100,8 @@ public class MyAccountPage implements Initializable {
                     data.peopleList.remove(i);
                     System.out.println("Deleted account!");
                     messageInfo.setText("Your account has been deleted!");
-                    Main main = new Main();
-                    main.switchPage(event, "Login.fxml");
+
+                    views.switchPage(Views.VIEW_LOGIN_PAGE);
                 }
             }
 

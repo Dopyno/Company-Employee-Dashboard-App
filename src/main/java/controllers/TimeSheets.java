@@ -1,4 +1,4 @@
-package com.example.logindemoapp;
+package controllers;
 
 public class TimeSheets {
     private String companyName;

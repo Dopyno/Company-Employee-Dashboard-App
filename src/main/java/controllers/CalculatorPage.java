@@ -1,6 +1,6 @@
-package com.example.logindemoapp;
+package controllers;
 
-import PersonModel.PersonModel;
+import dao.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorPage {
-    private DataSingleton data = null;
+    private Store data = null;
     private List<TimeSheets> list = new ArrayList<>();
 
     @FXML
@@ -77,7 +77,7 @@ public class CalculatorPage {
     }
 
     @FXML
-    public void initData(DataSingleton parentData){
+    public void initData(Store parentData){
         data = parentData;
     }
 }
