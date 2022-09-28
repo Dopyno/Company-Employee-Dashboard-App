@@ -40,9 +40,8 @@ public class MyAccountPage implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
     @FXML
-    public void viewInfo(ActionEvent event){
+    public void viewInfo(){
         login.loadContactListFromTxt();
-        if (event.getSource() == accInfoButton){
             System.out.println(data.getUserName());
             for (PersonModel model : login.peopleList){
                 if (data.getUserName().equals(model.getUserName())){
@@ -51,7 +50,10 @@ public class MyAccountPage implements Initializable {
                     System.out.println(model);
                 }
             }
-        }
+    }
+    @FXML
+    public void initialize(){
+        viewInfo();
     }
     @FXML
     public void submitAccountChanges(ActionEvent event)throws IOException {

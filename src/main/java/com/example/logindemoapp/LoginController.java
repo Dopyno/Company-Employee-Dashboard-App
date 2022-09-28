@@ -198,6 +198,7 @@ public class LoginController{
    }
    @FXML
    public void checkUserAndPassword(Main main, ActionEvent event, ArrayList<PersonModel> list, TextField user, PasswordField password)throws IOException{
+
       for (int i = 0; i < list.size(); i++){
          if(user.getText().toString().equals(list.get(i).getUserName()) && password.getText().toString().equals(list.get(i).getPassword())){
             messageLabel.setText("Login successfully!");
