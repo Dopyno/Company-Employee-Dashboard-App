@@ -24,18 +24,12 @@ public class AppPageController implements Initializable {
     @FXML
     public void logOut(ActionEvent event) throws IOException {
         Main main = new Main();
-       // main.changeScene("Login.fxml");
         main.switchPage(event, "Login.fxml");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
-    @FXML
-    public void switchHomePage(ActionEvent event){
-        if(event.getSource() == homeButton){
-           homePane.setVisible(true);
-        }
-    }
+
     @FXML
     private void calculatorScreen(ActionEvent event) throws IOException {
         AnchorPane view = FXMLLoader.load(getClass().getResource("CalculatorPage.fxml"));
@@ -53,8 +47,7 @@ public class AppPageController implements Initializable {
     }
     @FXML
     private void homeScreen(ActionEvent event) throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-        borderPane.setCenter(view);
+       Main main = new Main();
+       main.switchPage(event, "MainPage.fxml");
     }
-
 }
