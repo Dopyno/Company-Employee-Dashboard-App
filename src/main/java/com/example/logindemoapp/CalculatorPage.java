@@ -7,6 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +37,7 @@ public class CalculatorPage {
                 int hours = Integer.parseInt(hoursField.getText());
                 list.add(new TimeSheets(nameField.getText(), jobField.getText(), hours));
                 messageLabel.setText("Your entry was added successfully!");
-                textLive.appendText("You work for " + nameField.getText() + " as a " + jobField.getText() + " for " + hoursField.getText() + " hours\n");
+                textLive.appendText("You work for " + nameField.getText() + " as a " + jobField.getText() + " for " + hoursField.getText() + " hours.\n");
                 textLive.setWrapText(true);
                 clearFields();
                 //calculate();
@@ -44,9 +48,10 @@ public class CalculatorPage {
             }
         }
     }
-
     @FXML
     public void calculate(ActionEvent event){
+        LoginController control = new LoginController();
+        control.loadContactListFromTxt();
         int total = 0;
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getJobType().toLowerCase().contains("driver")){

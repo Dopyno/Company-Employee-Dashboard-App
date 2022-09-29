@@ -73,9 +73,8 @@ public class MyAccountPage implements Initializable {
                 messageInfo.setText("Changed successfully!");
                 clearInfoFields();
             }
-
+            login.saveContactListToTxt();  //load to txt
         }
-        login.saveContactListToTxt();  //load to txt
     }
     @FXML
     public void deleteAccount(ActionEvent event)throws IOException{
@@ -90,7 +89,6 @@ public class MyAccountPage implements Initializable {
                     main.switchPage(event, "Login.fxml");
                 }
             }
-
         }
         login.saveContactListToTxt();
     }
