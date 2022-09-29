@@ -7,12 +7,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AppPageController implements Initializable {
+    @FXML
+    private WebView webView;
+    private WebEngine engine;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -28,6 +33,11 @@ public class AppPageController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        engine = webView.getEngine();
+        loadPage();
+    }
+    public void loadPage(){
+        engine.load("https://www.hhrec.co.uk/");
     }
 
     @FXML

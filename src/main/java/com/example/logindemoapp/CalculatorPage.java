@@ -1,6 +1,5 @@
 package com.example.logindemoapp;
 
-import PersonModel.PersonModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
